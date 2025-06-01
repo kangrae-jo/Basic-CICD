@@ -2,8 +2,10 @@ name: CD to EC2  # 워크플로우 이름
 
 on:
   push:
-    branches:
-      - main  # main 브랜치에 push 되면 실행 (CI 후)
+    branches: [ "main" ]
+    paths:
+      - 'src/**'
+      - 'deploy.sh'
 
 jobs:
   deploy:
