@@ -33,7 +33,7 @@ jobs:
             exit 1
           fi
 
-      - name: ✅ Check JAR and deploy.sh before SCP
+      - name: Check JAR and deploy.sh before SCP
         run: |
           echo "🔍 build/libs 디렉토리:"
           ls -lh build/libs/
@@ -44,12 +44,12 @@ jobs:
           JAR_FILE=$(ls build/libs/*.jar | grep -v plain | head -n 1)
 
           if [ ! -f "$JAR_FILE" ]; then
-            echo "❌ JAR 파일이 없습니다. 배포를 중단합니다."
+            echo "JAR 파일이 없습니다. 배포를 중단합니다."
             exit 1
           fi
 
           if [ ! -f ./deploy.sh ]; then
-            echo "❌ deploy.sh 파일이 없습니다. 배포를 중단합니다."
+            echo "deploy.sh 파일이 없습니다. 배포를 중단합니다."
             exit 1
           fi
 
@@ -60,8 +60,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           source: |
-            ./build/libs/Basic-CICD-0.0.1-SNAPSHOT.jar
-            ./deploy.sh
+            build/libs/*.jar
+            deploy.sh
           target: "~/app/"
 
       - name: Run jar on EC2
