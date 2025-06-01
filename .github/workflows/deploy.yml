@@ -38,6 +38,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: "build/libs/*.jar"
           target: "~/app/build/libs/"
+          strip_components: 2
 
       - name: Run jar on EC2
         uses: appleboy/ssh-action@master
