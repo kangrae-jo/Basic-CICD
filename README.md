@@ -43,3 +43,10 @@ fi
 echo "[DEPLOY] 앱 실행 시작"
 nohup java -jar $JAR_NAME > deploy.log 2>&1 &
 ```
+
+## 노트
+
+1. github에서 build하여 .jar를 ec2로 보낸다.
+2. ec2의 deploy.sh를 실행시킨다. (실제 배포 로직)
+
++ deploy.sh도 github에서 관리하려고 했으나 원인 모를 이유로 실패
