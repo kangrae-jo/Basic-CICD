@@ -37,7 +37,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           source: "build/libs/*.jar"
-          target: "~/app/"
+          target: "~/app/build/libs/"
 
       - name: Run jar on EC2
         uses: appleboy/ssh-action@master
