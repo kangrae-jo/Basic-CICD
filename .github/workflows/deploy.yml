@@ -40,7 +40,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: |
             build/libs/*.jar
-            deploy.sh
+            ./deploy.sh
           target: "~/app/"
 
       - name: Run jar on EC2
