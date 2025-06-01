@@ -1,0 +1,42 @@
+name: CD to EC2  # 워크플로우 이름
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 push 되면 실행 (CI 후)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+      - name: Send jar to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "build/libs/*.jar"
+          target: "~/app/app.jar"
+
+      - name: Run jar on EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            chmod +x ~/app/deploy.sh
+            bash ~/app/deploy.sh
