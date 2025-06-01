@@ -42,7 +42,6 @@ jobs:
             build/libs/*.jar
             deploy.sh
           target: "~/app/"
-          strip_components: 2
 
       - name: Run jar on EC2
         uses: appleboy/ssh-action@master
