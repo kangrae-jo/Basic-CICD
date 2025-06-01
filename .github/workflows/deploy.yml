@@ -6,7 +6,7 @@ on:
     paths:
       - 'src/**'
       - 'deploy.sh'
-      - 'workflows/**'
+      - '.github/workflows/**'
 
 jobs:
   deploy:
