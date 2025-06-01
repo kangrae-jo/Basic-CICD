@@ -23,7 +23,7 @@ jobs:
           distribution: 'corretto'
 
       - name: Build with Gradle
-        run: ./gradlew clean build
+        run: ./gradlew clean build -x test
 
       - name: Check jar output
         run: |

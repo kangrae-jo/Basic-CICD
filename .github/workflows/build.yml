@@ -28,4 +28,4 @@ jobs:
       #   cache-read-only: true
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew build  # 실제 Gradle 빌드 실행 (Wrapper 사용)
+      run: ./gradlew clean test  # 실제 Gradle 빌드 실행 (Wrapper 사용)
