@@ -1,8 +1,6 @@
 name: Java CI with Gradle  # 워크플로우 이름 (Actions 탭에서 표시됨)
 
 on:
-  push:
-    branches: [ "main" ]  # main 브랜치에 push 될 때 실행
   pull_request:
     branches: [ "main" ]  # main 브랜치 대상 PR 생성/업데이트 시 실행
 
@@ -29,3 +27,11 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew clean test  # 실제 Gradle 빌드 실행 (Wrapper 사용)
+
+    - name: Report Test Results
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: JUnit Tests
+        path: build/test-results/test/*.xml
+        reporter: java-junit
