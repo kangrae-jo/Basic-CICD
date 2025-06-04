@@ -1,15 +1,17 @@
-name: Java CI with Gradle  # 워크플로우 이름 (Actions 탭에서 표시됨)
+name: Java CI with Gradle  # 워크플로우 이름
 
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]  # main 브랜치 대상 PR 생성/업데이트 시 실행
 
 jobs:
   build:  # build라는 Job 단위 정의
     runs-on: ubuntu-latest  # GitHub가 제공하는 최신 Ubuntu Runner 사용
-
     permissions:
       contents: read  # 기본 코드 접근 권한만 설정 (보안적으로 안전)
+      pull-requests: write  # 코멘트 작성 위해 필요
 
     steps:
     - uses: actions/checkout@v4  # 저장소 코드 체크아웃
