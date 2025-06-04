@@ -16,4 +16,9 @@ class ApplicationTest {
         assertEquals(2,2);
     }
 
+    @Test
+    public void 테스트를_위한_테스트3() {
+        assertEquals(3,3);
+    }
+
 }
