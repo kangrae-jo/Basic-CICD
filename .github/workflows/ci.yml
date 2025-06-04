@@ -35,3 +35,10 @@ jobs:
           name: JUnit Tests
           path: build/test-results/test/*.xml
           reporter: java-junit
+
+      - name: 💬 Comment test summary on PR
+        uses: mikepenz/action-junit-report@v4
+        if: github.event_name == 'pull_request'
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
